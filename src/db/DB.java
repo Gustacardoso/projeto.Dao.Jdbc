@@ -28,7 +28,7 @@ public class DB {
 		return conn;// o retorno caso  ja tenha a coneccao  ja existente
 	}
 	
-	
+	//gestaorh.poa@arploenix.com.br
 	//agora vamos fechar a conecção
 	//porqu criamos uma classe static?
 	//porque e um metodo da classe, ou seja so  vamos usar ela aq na classe
