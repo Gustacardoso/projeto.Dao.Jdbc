@@ -2,16 +2,18 @@ package application;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import model.Dao.DaoFactory;
 import model.Dao.SellerDao;
-import model.Dao.impl.SellerDaoJDBC;
 import model.entities.Department;
 import model.entities.Seller;
 
 public class Program {
 
 	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
 		
 		/*Department obj = new Department(1, "Car");
 		
@@ -53,11 +55,19 @@ public class Program {
 	
 	 System.out.println("==== Teste  5 Seller update ====");
      //seller findbyid para ver qual id eu quero  mudar
-	 seller = sellerDao.findById(1);
+	 seller = sellerDao.findById(8);
 	 //o que eu  quero  mudar, neste caso  irei  mudar so  no name
-	 seller.setName("deu certo errou");
+	seller.setName("deu certo errou");
 	 seller.setEmail("email modificado");
 	 sellerDao.update(seller);
 	 System.out.println("Update Completed");
+	 
+	 System.out.println("==== Teste  6 Seller Delete  ====");
+	 System.out.println("Enter id for delete test");
+	 int idDelete = sc.nextInt();
+     sellerDao.deleteById(idDelete);
+     System.out.println("Sucess Delete");
+     
+     sc.close();
 	}
 }
