@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import db.DB;
 import db.DbException;
@@ -90,6 +92,54 @@ public class SellerDaoJDBC implements SellerDao {
 	public List<Seller> findAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public List<Seller> findByDepartment(Department department) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"SELECT seller.*,department.Name as DepName " + 
+					"FROM seller INNER JOIN department " + 
+					"ON seller.DepartmentId = department.Id " + 
+					"WHERE DepartmentId = ? " + 
+					"ORDER BY Name");
+			
+			//vamos configurar a '?' atraves do parametro usando  o setint 
+			st.setInt(1, department.getId());
+			rs = st.executeQuery();
+			
+			//teremos que criar uma lista
+			List<Seller> list = new ArrayList<>();
+			//criar uma instrotura map para nao repetir
+			Map<Integer, Department> map = new HashMap<>();
+			
+			//configurando o preenchimentos das colunas
+			//e vamos usar um while porque devemos ter tanto 0 buscas como mais de uma 
+			while(rs.next()) {
+				//temos que testar se o department ja existe
+				Department dep = map.get(rs.getInt("DepartmentId"));
+				/*resumindo foi usado o map para nao ter dois ou meias department
+				 * ja que tem que ser um deportment para muito seller
+				 * num departament tem 1 para muitos vendedores*/
+				if(dep == null) {
+					dep = instantiateDepartment(rs);
+					map.put(rs.getInt("DepartmentId"), dep);
+				}
+				
+			  Seller obj = instantiateSeller(rs, dep);
+			    list.add(obj);
+			}
+			return list;
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			//fechar 
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+		
 	}
 	
 

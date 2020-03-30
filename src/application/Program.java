@@ -1,6 +1,7 @@
 package application;
 
 import java.util.Date;
+import java.util.List;
 
 import model.Dao.DaoFactory;
 import model.Dao.SellerDao;
@@ -18,13 +19,20 @@ public class Program {
 		
 		/*desta forma o meu  pragrama nao  conhece a implemetação,
            conhece so mente a interface, é tambem uma forma de mostrar as dependecia sem espliciatar a implementação   */
-	System.out.println("=== Teste 1 findById");
+	System.out.println("=== Teste 1 findById====");
 		SellerDao sellerDao = DaoFactory.createSellerDao();
 	
 	Seller seller = sellerDao.findById(3);
 	
 	System.out.println(seller);
-	  
+	
+	System.out.println("=== Teste 1 findByIdDepartment === ");
+	  Department department = new Department(2, null);
+	  List<Seller> list = sellerDao.findByDepartment(department);
+	 
+	  for (Seller obj : list) {
+		System.out.println(obj);
+	}
 	}
 
 }
