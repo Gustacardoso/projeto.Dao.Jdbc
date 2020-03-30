@@ -49,6 +49,15 @@ public class Program {
 	  sellerDao.insert(newSeller);
 	  
 	  System.out.println("Inserted! new Name= " + newSeller.getName());
+	
+	
+	 System.out.println("==== Teste  5 Seller update ====");
+     //seller findbyid para ver qual id eu quero  mudar
+	 seller = sellerDao.findById(1);
+	 //o que eu  quero  mudar, neste caso  irei  mudar so  no name
+	 seller.setName("deu certo errou");
+	 seller.setEmail("email modificado");
+	 sellerDao.update(seller);
+	 System.out.println("Update Completed");
 	}
-
 }
