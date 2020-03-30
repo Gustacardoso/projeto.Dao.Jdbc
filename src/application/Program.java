@@ -18,7 +18,8 @@ public class Program {
 		
 		/*desta forma o meu  pragrama nao  conhece a implemetação,
            conhece so mente a interface, é tambem uma forma de mostrar as dependecia sem espliciatar a implementação   */
-	SellerDao sellerDao = DaoFactory.createSellerDao();
+	System.out.println("=== Teste 1 findById");
+		SellerDao sellerDao = DaoFactory.createSellerDao();
 	
 	Seller seller = sellerDao.findById(3);
 	
