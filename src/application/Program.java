@@ -26,11 +26,19 @@ public class Program {
 	
 	System.out.println(seller);
 	
-	System.out.println("=== Teste 1 findByIdDepartment === ");
+	System.out.println("=== Teste 2 findByIdDepartment === ");
 	  Department department = new Department(2, null);
 	  List<Seller> list = sellerDao.findByDepartment(department);
 	 
 	  for (Seller obj : list) {
+		System.out.println(obj);
+	}
+	  
+	  System.out.println("==== Teste 3 findAll====");
+	  
+	  List<Seller> list2 = sellerDao.findAll();
+	  
+	  for (Seller obj : list2) {
 		System.out.println(obj);
 	}
 	}
